@@ -48,7 +48,7 @@ public:
 
 struct Face {
 	uint32 materialId;
-	Common::Array<uint32> vertexIndices;
+	Common::Array<uint16> vertexIndices;
 
 	Face() : materialId(0) {}
 };

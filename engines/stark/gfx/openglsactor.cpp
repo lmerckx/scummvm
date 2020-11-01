@@ -115,7 +115,7 @@ void OpenGLSActorRenderer::render(const Math::Vector3d &position, float directio
 
 		GLuint ebo = _faceEBO[*face];
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-		glDrawElements(GL_TRIANGLES, (*face)->vertexIndices.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, (*face)->vertexIndices.size(), GL_UNSIGNED_SHORT, 0);
 	}
 
 	_shader->unbind();
@@ -147,7 +147,7 @@ void OpenGLSActorRenderer::render(const Math::Vector3d &position, float directio
 		for (Common::Array<Face *>::const_iterator face = faces.begin(); face != faces.end(); ++face) {
 			GLuint ebo = _faceEBO[*face];
 			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-			glDrawElements(GL_TRIANGLES, (*face)->vertexIndices.size(), GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, (*face)->vertexIndices.size(), GL_UNSIGNED_SHORT, 0);
 		}
 
 		glDisable(GL_BLEND);
@@ -213,7 +213,7 @@ GLuint OpenGLSActorRenderer::createModelVBO(const Model *model) {
 }
 
 GLuint OpenGLSActorRenderer::createFaceEBO(const Face *face) {
-	return OpenGL::ShaderGL::createBuffer(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint32) * face->vertexIndices.size(), &face->vertexIndices[0]);
+	return OpenGL::ShaderGL::createBuffer(GL_ELEMENT_ARRAY_BUFFER, sizeof(uint16) * face->vertexIndices.size(), &face->vertexIndices[0]);
 }
 
 void OpenGLSActorRenderer::setBonePositionArrayUniform(OpenGL::ShaderGL *shader, const char *uniform) {
